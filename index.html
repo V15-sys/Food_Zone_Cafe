@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Food Zone Café</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--primary:#ff4d00;
+--dark:#111;
+--light:#ffffff;
+--bg:#f4f4f4;
+--shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+background:var(--bg);
+color:#333;
+transition:0.4s;
+}
+
+body.dark{
+--bg:#0f0f0f;
+--light:#1e1e1e;
+color:#fff;
+}
+
+header{
+background:linear-gradient(90deg,#111,#1c1c1c);
+color:white;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 60px;
+position:sticky;
+top:0;
+z-index:1000;
+box-shadow:0 5px 20px rgba(0,0,0,0.4);
+}
+
+.logo{
+font-size:24px;
+font-weight:700;
+letter-spacing:1px;
+color:#ff4d00;
+}
+
+nav{
+display:flex;
+gap:25px;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+font-weight:500;
+transition:0.3s;
+position:relative;
+}
+
+nav a::after{
+content:"";
+position:absolute;
+left:0;
+bottom:-5px;
+width:0%;
+height:2px;
+background:#ff4d00;
+transition:0.3s;
+}
+
+nav a:hover::after{
+width:100%;
+}
+
+.icons{
+display:flex;
+align-items:center;
+gap:25px;
+font-size:18px;
+}
+
+.logo{
+font-size:22px;
+font-weight:700;
+color:var(--primary);
+}
+
+nav a{
+color:white;
+margin:0 15px;
+text-decoration:none;
+font-weight:500;
+cursor:pointer;
+transition:0.3s;
+}
+
+nav a:hover{
+color:var(--primary);
+}
+
+.icons{
+display:flex;
+align-items:center;
+gap:20px;
+}
+
+.cart{
+position:relative;
+cursor:pointer;
+font-size:20px;
+}
+
+.cart span{
+position:absolute;
+top:-8px;
+right:-10px;
+background:red;
+color:white;
+font-size:12px;
+padding:2px 6px;
+border-radius:50%;
+}
+
+.toggle{
+cursor:pointer;
+font-size:20px;
+}
+
+section{
+display:none;
+padding:60px 10%;
+animation:fadeIn 0.5s ease;
+}
+
+section.active{
+display:block;
+}
+
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+/* HERO */
+.hero{
+height:85vh;
+background:url('outside.png') center/cover;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+text-align:center;
+flex-direction:column;
+}
+
+.hero h1{
+font-size:3rem;
+background:rgba(0,0,0,0.6);
+padding:20px;
+border-radius:10px;
+}
+
+.btn{
+margin-top:20px;
+padding:12px 25px;
+background:var(--primary);
+border:none;
+color:white;
+cursor:pointer;
+border-radius:6px;
+transition:0.3s;
+}
+
+.btn:hover{
+transform:scale(1.05);
+}
+
+/* MENU */
+.menu{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.card{
+background:var(--light);
+padding:15px;
+border-radius:15px;
+box-shadow:var(--shadow);
+transition:0.3s;
+text-align:center;
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+.card img{
+width:100%;
+height:160px;
+object-fit:cover;
+border-radius:12px;
+}
+
+.card button{
+margin-top:10px;
+padding:8px 15px;
+background:var(--primary);
+border:none;
+color:white;
+cursor:pointer;
+border-radius:5px;
+}
+
+/* CART */
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+background:var(--light);
+border-radius:10px;
+overflow:hidden;
+}
+
+th,td{
+padding:12px;
+text-align:center;
+border-bottom:1px solid #ccc;
+}
+
+.qty-btn{
+padding:4px 8px;
+background:var(--primary);
+color:white;
+border:none;
+cursor:pointer;
+border-radius:3px;
+}
+
+.payment-box{
+margin-top:30px;
+background:var(--light);
+padding:25px;
+border-radius:12px;
+box-shadow:var(--shadow);
+}
+
+/* FOOTER */
+footer{
+background:#111;
+color:white;
+padding:60px 10%;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:40px;
+}
+
+footer h3{
+color:#ff4d00;
+margin-bottom:15px;
+}
+
+footer p, footer a{
+color:#bbb;
+font-size:14px;
+text-decoration:none;
+line-height:1.8;
+cursor:pointer;
+transition:0.3s;
+}
+
+footer a:hover{
+color:white;
+}
+
+.copy{
+background:#000;
+color:#aaa;
+text-align:center;
+padding:15px;
+font-size:14px;
+}
+
+footer h3{
+color:var(--primary);
+}
+
+footer p,footer a{
+color:#ccc;
+font-size:14px;
+text-decoration:none;
+}
+
+.copy{
+background:#000;
+color:white;
+text-align:center;
+padding:10px;
+}
+
+iframe{
+width:100%;
+height:300px;
+border:none;
+border-radius:10px;
+margin-top:20px;
+}
+
+@media(max-width:768px){
+header{flex-direction:column;}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">🍽️ FOOD ZONE</div>
+
+<nav>
+<a onclick="showSection('home')">Home</a>
+<a onclick="showSection('menu')">Menu</a>
+<a onclick="showSection('gallery')">Gallery</a>
+<a onclick="showSection('contact')">Contact</a>
+<a onclick="showSection('cart')">Cart</a>
+</nav>
+
+<div class="icons">
+<div class="toggle" onclick="toggleDark()">🌙</div>
+<div class="cart" onclick="showSection('cart')">
+🛒 <span id="cartCount">0</span>
+</div>
+</div>
+</header>
+
+
+<!-- HOME -->
+<section id="home" class="active">
+<div class="hero">
+<h1>Only For Real Foodies 🍕</h1>
+<button class="btn" onclick="showSection('menu')">Order Now</button>
+</div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+<h2>Our Specials</h2>
+<div class="menu">
+
+<div class="card">
+<img src="pizza.png">
+<h3>Margherita Pizza</h3>
+<p>₹130</p>
+<button onclick="addToCart('Margherita Pizza',130)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="pizza1.png">
+<h3>Paneer Pizza</h3>
+<p>₹170</p>
+<button onclick="addToCart('Paneer Pizza',170)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="coffee.png">
+<h3>Cold Coffee</h3>
+<p>₹50</p>
+<button onclick="addToCart('Cold Coffee',50)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="dosa.png">
+<h3>South Indian Dosa</h3>
+<p>₹80</p>
+<button onclick="addToCart('South Indian Dosa',80)">Add to Cart</button>
+</div>
+
+</div>
+</section>
+
+<!-- CART -->
+<section id="cart">
+<h2>Your Cart</h2>
+
+<table id="cartTable">
+<thead>
+<tr>
+<th>Item</th>
+<th>Price</th>
+<th>Qty</th>
+<th>Total</th>
+<th>Remove</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+
+<h3 id="grandTotal" style="text-align:right;margin-top:20px;">
+Grand Total: ₹0
+</h3>
+
+<div class="payment-box">
+<h3>Payment Method</h3>
+
+<select id="paymentMethod" style="padding:8px;margin-top:10px;">
+<option>UPI</option>
+<option>Credit Card</option>
+<option>Cash on Delivery</option>
+</select>
+
+<br><br>
+
+<button class="btn" onclick="payNow()">Pay Now</button>
+
+<p id="successMessage" style="color:green;font-weight:600;margin-top:15px;"></p>
+</div>
+
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+<h2>Our Place</h2>
+<img src="interior.png" width="100%" style="border-radius:10px;">
+<img src="interior1.png" width="100%" style="border-radius:10px;margin-top:20px;">
+<img src="interior2.png" width="100%" style="border-radius:10px;margin-top:20px;">
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+<h2>Visit Us</h2>
+<iframe src="https://www.google.com/maps?q=Food%20Zone%20Restaurant%20Cafe&output=embed"></iframe>
+</section>
+
+<footer>
+<div>
+<h3>Food Zone Café</h3>
+<p>Experience premium taste with modern ambiance and quality ingredients.</p>
+<p>Serving happiness since 2026.</p>
+</div>
+
+<div>
+<h3>Quick Links</h3>
+<p><a onclick="showSection('home')">Home</a></p>
+<p><a onclick="showSection('menu')">Menu</a></p>
+<p><a onclick="showSection('gallery')">Gallery</a></p>
+<p><a onclick="showSection('contact')">Contact</a></p>
+</div>
+
+<div>
+<h3>Opening Hours</h3>
+<p>Mon - Fri: 10:00 AM - 10:00 PM</p>
+<p>Sat - Sun: 9:00 AM - 11:00 PM</p>
+</div>
+
+<div>
+<h3>Contact Info</h3>
+<p>📞 +91 9876543210</p>
+<p>📧 foodzone@email.com</p>
+<p>📍 Your City, India</p>
+</div>
+</footer>
+
+<div class="copy">
+© 2026 Food Zone Café | Designed & Developed by You 🚀
+</div>
+
+
+<div class="copy">
+© 2026 Food Zone Café | Developed by Developer
+</div>
+
+<script>
+
+function showSection(id){
+document.querySelectorAll("section").forEach(sec=>sec.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+window.scrollTo(0,0);
+}
+
+function toggleDark(){
+document.body.classList.toggle("dark");
+}
+
+let cart = [];
+
+function addToCart(name, price){
+let item = cart.find(p => p.name === name);
+if(item){
+item.qty++;
+}else{
+cart.push({name:name, price:price, qty:1});
+}
+updateCart();
+}
+
+function updateCart(){
+let tbody = document.querySelector("#cartTable tbody");
+tbody.innerHTML = "";
+
+let total = 0;
+let count = 0;
+
+cart.forEach((item,index)=>{
+let itemTotal = item.price * item.qty;
+total += itemTotal;
+count += item.qty;
+
+tbody.innerHTML += `
+<tr>
+<td>${item.name}</td>
+<td>₹${item.price}</td>
+<td>
+<button class="qty-btn" onclick="changeQty(${index},-1)">-</button>
+${item.qty}
+<button class="qty-btn" onclick="changeQty(${index},1)">+</button>
+</td>
+<td>₹${itemTotal}</td>
+<td><button class="qty-btn" onclick="removeItem(${index})">X</button></td>
+</tr>
+`;
+});
+
+document.getElementById("grandTotal").innerText = "Grand Total: ₹" + total;
+document.getElementById("cartCount").innerText = count;
+}
+
+function changeQty(index, change){
+cart[index].qty += change;
+if(cart[index].qty <= 0){
+cart.splice(index,1);
+}
+updateCart();
+}
+
+function removeItem(index){
+cart.splice(index,1);
+updateCart();
+}
+
+function payNow(){
+if(cart.length === 0){
+alert("Cart is empty!");
+return;
+}
+
+document.getElementById("successMessage").innerText =
+"🎉 Payment Successful! Your order has been placed.";
+
+cart = [];
+updateCart();
+}
+
+</script>
+
+</body>
+</html>
